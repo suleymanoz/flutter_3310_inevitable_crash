@@ -17,13 +17,15 @@ class MainActivity: FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
             call, result ->
             when (call.method) {
-                "throwException" -> throw Exception("This will be a platform exception.")
                 "errorResult" -> result.error("ERROR", "This will be a platform error.", null)
+                "throwException" -> throw Exception("This will be a platform exception.")
                 "testCrash" -> {
                     Log.d("MainActivity", "Test crash")
                     GlobalScope.launch {
+                        Log.d("MainActivity", "Async before delay")
                         delay(3000) // delay execution after a while
-                        result.success("Test crash-1")
+                        Log.d("MainActivity", "Async after delay")
+                        result.success("Test crash-2")
                     }
 
                     result.success("Test crash-1")
