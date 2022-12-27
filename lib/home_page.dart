@@ -38,12 +38,42 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  await platform.invokeMethod('testCrash');
+                  await platform.invokeMethod('syncDoubleResult');
                 } on PlatformException catch (e) {
-                  debugPrint('testCrash: Platform error caught: $e');
+                  debugPrint('syncDoubleResult: Platform error caught: $e');
                 }
               },
-              child: const Text('Test Crash'),
+              child: const Text('Sync Double Result'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  await platform.invokeMethod('syncDelayedDoubleResult');
+                } on PlatformException catch (e) {
+                  debugPrint('syncDelayedDoubleResult: Platform error caught: $e');
+                }
+              },
+              child: const Text('Sync Delayed Double Result'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  await platform.invokeMethod('asyncDoubleResult');
+                } on PlatformException catch (e) {
+                  debugPrint('asyncDoubleResult: Platform error caught: $e');
+                }
+              },
+              child: const Text('Async Double Result'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  await platform.invokeMethod('avoidCrash');
+                } on PlatformException catch (e) {
+                  debugPrint('avoidCrash: Platform error caught: $e');
+                }
+              },
+              child: const Text('Avoid Crash'),
             ),
           ],
         ),
